@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>ECharts</title>
+    <title>SS使用量统计</title>
     <script src="./echarts.min.js"></script>
 </head>
 <body>

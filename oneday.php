@@ -35,7 +35,7 @@ function isTimeRow($line) {
    return false;
 }
 
-//判断一行时间是否为24*31小时内
+//判断一行时间是否为24小时内
 function isLatestDayDate($line) {
     if (!isTimeRow($line)) {
        return false; 
@@ -43,7 +43,7 @@ function isLatestDayDate($line) {
     #bug fix for type time format
     $line[11] = " ";
     $timeStamp = strtotime(str_replace('#', '', $line));
-    if (time() - $timeStamp < 24*31*3600) {
+    if (time() - $timeStamp < 24*3600) {
         return true;
     }
     return false;
@@ -68,13 +68,13 @@ function isAnalyzePort($port) {
    return false;
 }
 
-function getDayBeforeFromLine($line) {
+function getHourBeforeFromLine($line) {
     if (!isTimeRow($line)) {
         return false;
     }
     $line[11] = " ";
     $timeStamp = strtotime(str_replace('#', '', $line));
-    return floor(time()/86400) - floor($timeStamp/86400)-1;
+    return floor(time()/3600) - floor($timeStamp/3600)-1;
 }
 
 function getTimeStampFromLine($line) {
@@ -88,13 +88,13 @@ function getTimeStampFromLine($line) {
 
 $ret = [];
 $date = 0;
-$dayBefore = 0;
+$hourBefore = 0;
 
 while (($line = fgets($fp)) !== false) {
     $line = trim($line);
     if ($isLatestDayDate === false) {
         if( isTimeRow($line) && isLatestDayDate($line)) {
-            //到达31Days内数据区域
+            //到达1Day内数据区域
            $isLatestDayDate = true; 
         }
 
@@ -103,23 +103,25 @@ while (($line = fgets($fp)) !== false) {
     if ($isLatestDayDate) {
         if (isTimeRow($line)) {
            $date = getMdFromLine($line);
-           $dayBefore = getDayBeforeFromLine($line);
+           $hourBefore = getHourBeforeFromLine($line);
            $dayM =  date('m', getTimeStampFromLine($line));
            $dayD =  date('d', getTimeStampFromLine($line));
+           $dayH =  date('H', getTimeStampFromLine($line));
         } elseif ($line[0] != '#') {
             $tmp = explode(' ', $line);
             $port = $tmp[1];
             $count = $tmp[0];
             if (isAnalyzePort($port)) {
-                if (!isset($ret[$port][$dayBefore])) {
-                    $ret[$port][$dayBefore] = [
-                        $dayBefore+1,
+                if (!isset($ret[$port][$hourBefore])) {
+                    $ret[$port][$hourBefore] = [
+                        $hourBefore+1,
                         $count,
                         $dayM,
                         $dayD,
+                        $dayH,
                     ];
                 } else {
-                    $ret[$port][$dayBefore][1] += $count;
+                    $ret[$port][$hourBefore][1] += $count;
                 }
             }
         }
@@ -170,4 +172,4 @@ foreach($title as $k => $v) {
 }
 $titleJson = json_encode($title);
 
-include ('index.tpl');
+include ('oneday.tpl');

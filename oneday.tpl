@@ -7,7 +7,7 @@
 </head>
 <body>
 <div align="center">
-    <h3>SS使用量统计(31天内)<a href="./oneday.php">查看24小时</a></h3>
+    <h3>SS使用量统计(24小时内)<a href="./">查看31天</a></h3>
     <h4>注：指数值为每天每分钟连接数总和</h4>
     <div id="main" style="width: 1400px;height:640px;"></div>
 </div>
@@ -57,20 +57,20 @@
             formatter: function (obj) {
                 var value = obj.value;
                 return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
-                        + obj.seriesName + ' ' + value[2] +'月' + value[3] + '日'
+                        + obj.seriesName + ' ' + value[2] +'月' + value[3] + '日' + value[4] + '时'
                         + '</div>'
                         + schema[1].text + '：' + value[1] + '<br>';
             }
         },
         xAxis: {
             type: 'value',
-            name: '距今天天数',
+            name: '距现在小时数',
             nameGap: 16,
             nameTextStyle: {
                 color: '#fff',
                 fontSize: 14
             },
-            max: 32,
+            max: 24,
             splitLine: {
                 show: false
             },

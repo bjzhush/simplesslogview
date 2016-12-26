@@ -8,7 +8,7 @@
 <body>
 <div align="center">
     <h3>SS使用量统计(24小时内)<a href="./">查看31天</a></h3>
-    <h4>注：指数值为每天每分钟连接数总和</h4>
+    <h4>注：指数值为每小时内每分钟连接数总和</h4>
     <div id="main" style="width: 1400px;height:640px;"></div>
 </div>
 <script type="text/javascript">

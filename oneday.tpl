@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>SS使用量统计</title>
-    <script src="./echarts.min.js"></script>
+    <script src="//cdn.bootcss.com/echarts/3.3.2/echarts.min.js"></script>
 </head>
 <body>
 <div align="center">

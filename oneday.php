@@ -10,7 +10,7 @@ if (!$fp) {
 $isLatestDayDate = false;
 
 $alias = [
-    18888 => 'zhus',
+    18888 => 'liqi',
     20001 => 'sqpQun',
     20005 => 'caoyl',
     20006 => 'zhaoz',
@@ -24,7 +24,8 @@ $alias = [
     20014 => 'one@sale',
     20015 => 'wufq',
     20018 => 'zhoupp',
-    20019 => 'han@sale'
+    20019 => 'han@sale',
+    58888 => 'zhus'
 ];
 
 //判断一行是否未日期行

@@ -12,6 +12,7 @@ $isLatestDayDate = false;
 $alias = [
     18888 => 'liqi',
     20001 => 'sqpQun',
+    20004 => 'duanx',
     20005 => 'caoyl',
     20006 => 'zhaoz',
     20007 => 'lvs',
@@ -25,6 +26,9 @@ $alias = [
     20015 => 'wufq',
     20018 => 'zhoupp',
     20019 => 'han@sale',
+    20020 => 'guanrj',
+    20021 => 'zhaohuai',
+    20022 => 'miracle',
     58888 => 'zhus',
 ];
 

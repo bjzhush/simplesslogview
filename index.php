@@ -1,4 +1,7 @@
 <?php
+if (!isset($_COOKIE['user']) || $_COOKIE['user'] !== 'bjzhush') {
+    exit('Auth failed');
+}
 
 $file = '/var/log/ssstatus.log';
 
@@ -7,30 +10,16 @@ if (!$fp) {
     exit('error reading '.$file);
 }
 
+$configFile = '/etc/shadowsocks.json';
+$config = file_get_contents($configFile);
+$configArr = json_decode(trim($config), TRUE);
+if ($configArr == NULL) {
+    exit('error reading '.$configFile);
+}
+
 $isLatestDayDate = false;
 
-$alias = [
-    18888 => 'liqi',
-    20001 => 'sqpQun',
-    20004 => 'duanx',
-    20005 => 'caoyl',
-    20006 => 'zhaoz',
-    20007 => 'lvs',
-    20008 => 'gaoh',
-    20009 => 'zhaor',
-    20010 => 'dcmm',
-    20011 => 'qizf',
-    20012 => 'yangmq',
-    20013 => 'pang',
-    20014 => 'one@sale',
-    20015 => 'wufq',
-    20018 => 'zhoupp',
-    20019 => 'han@sale',
-    20020 => 'guanrj',
-    20021 => 'zhaohuai',
-    20022 => 'miracle',
-    58888 => 'zhus',
-];
+$alias = $configArr['port_password'];
 
 //判断一行是否未日期行
 function isTimeRow($line) {
